@@ -15,4 +15,6 @@ public interface UserService {
     void deleteByID(UUID id);
 
     User create(User user);
+    //The type of information returned by method is placed right before the name, that's why only delete is set as void
+    //Delete don't return anything
 }

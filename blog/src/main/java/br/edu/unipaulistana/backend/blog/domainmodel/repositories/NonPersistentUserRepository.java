@@ -48,7 +48,7 @@ public class NonPersistentUserRepository {
         //if any user was not found, return null and a message
             return null;
     }
-    //Esse é o codigo seguindo a lógica acima, porém para ser mais fluente use o warning da IDE para criar o codigo abaixo
+    //The code below is following above logic, but to be more fluent use warning from IDE to automatically create the code
     //public void removeByID(UUID id) {
         //for(User user : this.internalState){
             //if(user.getId().equals(id))
@@ -56,8 +56,8 @@ public class NonPersistentUserRepository {
 
     public void deleteUserByID(UUID id) {
         this.internalState.removeIf(user -> user.getId().equals(id));
-        //dentro dos usuarios, remova se o id passado for igual ao id do usuario dentro do banco de dados
-        //browser não faz requisções do tipo delete fácil, então tenho que usar com componente do linux
+        //Inside users, remove if received id is the same as id from repository
+        //Need to test this in terminal, because browser cant handle post requests easily
         }
 
     public User create(User user) {
