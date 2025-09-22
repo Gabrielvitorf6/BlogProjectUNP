@@ -1,0 +1,68 @@
+package br.edu.unipaulistana.backend.blog.domainmodel.repositories;
+
+import br.edu.unipaulistana.backend.blog.domainmodel.User;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+
+import com.github.javafaker.Faker;
+import org.springframework.stereotype.Component;
+
+//Inform Spring that is gonig to be injected in another place
+@Component
+public class NonPersistentUserRepository {
+    //Create list of users named as internalState
+    //Linked List is a list where all information is linked with previous info and subsequent info , like a chain
+    private List<User> internalState = new LinkedList<>();
+
+    //create a constructor, ALL CLASSES NEED A CONSTRUCTOR, this is where all information are placed automatically
+    public NonPersistentUserRepository() {
+        Faker faker = new Faker();//loop to create 100 users
+        for (int i=0; i<100;i++){
+            User user = new User(
+                    UUID.randomUUID(),//create id for users using UUID, that is almost impossible to repeat
+                    faker.name().fullName(),
+                    faker.internet().emailAddress(),//inside internet package, create valid emails
+                    faker.internet().password(),//inside internet package, create vali passwords
+                    null,//for now, both campuses are null, later add roles and profiles
+                    null
+            );
+            this.internalState.add(user);
+        }
+    }
+
+    public List<User> findAll() {
+            return this.internalState.stream().toList();
+            //To not use original version of users, use .stream.tolist. to create a copy of internalstate
+
+    }
+
+    public User findById(UUID id) {
+        //For each user from variable type User inside internalState
+        //If user.getId is the same id in internalState
+        for(User user : this.internalState) {
+            if (user.getId().equals(id))
+                return user;
+        }
+        //if any user was not found, return null and a message
+            return null;
+    }
+    //Esse é o codigo seguindo a lógica acima, porém para ser mais fluente use o warning da IDE para criar o codigo abaixo
+    //public void removeByID(UUID id) {
+        //for(User user : this.internalState){
+            //if(user.getId().equals(id))
+                //this.internalState.remove(user)
+
+    public void deleteUserByID(UUID id) {
+        this.internalState.removeIf(user -> user.getId().equals(id));
+        //dentro dos usuarios, remova se o id passado for igual ao id do usuario dentro do banco de dados
+        //browser não faz requisções do tipo delete fácil, então tenho que usar com componente do linux
+        }
+
+    public User create(User user) {
+        this.internalState.add(user);
+        return user;
+    }
+}
+
