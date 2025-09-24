@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
         private final NonPersistentUserRepository repository;
     @Override
     public List<User> findAll() {
-        return this.repository.findAll();//As this method doesn't exist, we need to create and implement this, in userrepository
+        return this.repository.findAll();//As this method doesn't exist, we need to create and implement this, in repository
         //Alt + Enter, and implement in user repository
     }
 
@@ -35,8 +35,18 @@ public class UserServiceImpl implements UserService{
             user.setId(UUID.randomUUID());
         //Everytime I do a checkage or update in the first few lines of a method, it's called defensive programming
         //The decision to search if the user already exists is a crucial business rule, and always exists in service folder or domain model
-        //RequestBody is needed because in any another system that access this API, we need to create a body with this object
+        //RequestBody is needed because in any another system that access this API, we need to create a body with this object to pass through json
         //Here we pass a user parameter because we're creating a user, and not only using ID
         return this.repository.create(user);
+    }
+
+    @Override
+    public User update(User user) {
+        return this.repository.update(user);
+    }
+
+    @Override
+    public User partUpdate(User user) {
+        return this.repository.update(user);
     }
 }

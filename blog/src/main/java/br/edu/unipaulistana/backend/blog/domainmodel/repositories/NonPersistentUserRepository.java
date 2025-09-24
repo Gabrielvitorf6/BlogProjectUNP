@@ -9,7 +9,7 @@ import java.util.UUID;
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Component;
 
-//Inform Spring that is gonig to be injected in another place
+//Inform Spring that is going to be injected in another place
 @Component
 public class NonPersistentUserRepository {
     //Create list of users named as internalState
@@ -63,6 +63,12 @@ public class NonPersistentUserRepository {
     public User create(User user) {
         this.internalState.add(user);
         return user;
+    }
+    public User update(User user) {
+        this.internalState.remove(user);
+        this.internalState.add(user);
+        return user;
+        //On update, we simply exclude the user and add with the same id
     }
 }
 
