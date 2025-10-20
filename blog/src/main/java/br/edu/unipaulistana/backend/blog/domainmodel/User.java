@@ -1,24 +1,54 @@
 package br.edu.unipaulistana.backend.blog.domainmodel;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Entity
+@Table(name = "TBL_USERS", indexes = {@Index(name = "IDX_NAME_PASS", columnList = "name , password"),
+        @Index(name = "IDX_EMAIL", columnList = "email"),
+        @Index(name = "IDX_PASSWORD", columnList = "password"),
+        @Index(name = "IDX_ROLE", columnList = "roles")
+})
 
 public class User {
-    private @Getter @Setter UUID id;
-    private @Getter @Setter String nome;
-    private @Getter @Setter String email;
-    private @Getter @Setter String password;
-    private @Getter @Setter List<Role> roles;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
+    private @Getter
+    @Setter UUID id;
+
+    @Column(name = "nome", nullable = false)
+    private @Getter
+    @Setter String nome;
+
+    @Column(name = "email", nullable = false, unique = true, length = 40)
+    private @Getter
+    @Setter String email;
+
+    @Column(name = "password", nullable = false, length = 20)
+    private @Getter
+    @Setter String password;
+
+
+    @ManyToMany
+    private @Getter @Setter Set<Role> roles;
+
+    @OneToOne
     private @Getter @Setter Profile profile;
+
+
+
+
+    /*private @Getter @Setter List<Role> roles;
+    private @Getter @Setter Profile profile; */
 
     @Override
     public boolean equals(Object o) {
@@ -36,3 +66,4 @@ public class User {
         //Hash code is used as a .equals, to say that  object is the same as another, but with a faster form
     }
 }
+

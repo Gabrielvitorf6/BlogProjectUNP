@@ -24,7 +24,7 @@ import java.util.UUID;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //Random port deploy test in a random port, not the 8080 port we always use
 
-@AutoConfigureMockMvc//
+@AutoConfigureMockMvc
 public class UserControllerIntegrationTest {
 
     //We test all endpoints and folders, and it's called "Integration test", when we integrate all system at once and test
@@ -41,8 +41,8 @@ public class UserControllerIntegrationTest {
     //Object mapper pass object to json and json to object
 
     @Test //We need to declare this method as method test //We use annotation @Test
-
-    //We need a annotation to see how it's works inside IDE and describe it
+    //Get test
+    //We need an annotation to see how it's works inside IDE and describe it
     @DisplayName("Full flow : POST -> GET ALL -> GET_BY_ID -> PUT -> PATH -> GET -> ERROR404")
     public void fullFlow() throws Exception{
         UUID id = UUID.randomUUID();//Attributes id variable as UUID random id

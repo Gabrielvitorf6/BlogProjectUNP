@@ -1,7 +1,7 @@
 package br.edu.unipaulistana.backend.blog.service;
 
 import br.edu.unipaulistana.backend.blog.domainmodel.User;
-import br.edu.unipaulistana.backend.blog.domainmodel.repositories.NonPersistentUserRepository;
+import br.edu.unipaulistana.backend.blog.domainmodel.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     //constructor that implements the list of users, named as repository
-        private final NonPersistentUserRepository repository;
+        private final UserRepository repository;
     @Override
     public List<User> findAll() {
         return this.repository.findAll();//As this method doesn't exist, we need to create and implement this, in repository
@@ -20,13 +20,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findbyID(UUID id) {
-        return this.repository.findById(id);
+    public User findUserByID(UUID id) {
+        return this.repository.findUserById(id);
     }
 
     @Override
     public void deleteByID(UUID id) {
-        this.repository.deleteUserByID(id);
+        this.repository.removeByID(id);
     }
 
     @Override

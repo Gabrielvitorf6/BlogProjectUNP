@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface UserService {
     List<User> findAll();
 
-    User findbyID(UUID id);
+    User findUserByID(UUID id);
 
     void deleteByID(UUID id);
 

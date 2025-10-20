@@ -66,11 +66,37 @@
 			<scope>test</scope>
             </dependency> <!--Adding dependency from Java faker to create users database with real information-->
         <dependency>
-        <groupId>com.github.javafaker</groupId>
-        <artifactId>javafaker</artifactId>
-        <version>1.0.2</version>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>1.0.2</version>
         </dependency>
-        </dependencies>
+        <!--INIT OF QUERYDSL DEPENDENCIES-->
+        <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>5.1.0</version>
+                <classifier>jakarta</classifier>
+        </dependency>
+
+        <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>5.1.0</version>
+                <classifier>jakarta</classifier>
+            </dependency>
+
+        <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-core</artifactId>
+                <version>5.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!--END OF QUERYDSL DEPENDENCIES-->
+                </dependencies>
 
 	<build>
 		<plugins>

@@ -28,7 +28,7 @@ public class UserController {
 
     //htt://localhost:8080/users/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserbyID(@PathVariable UUID id) {
+    public ResponseEntity<User> findUserByID(@PathVariable UUID id) {
         //public user indicates that only one user is returned
         //@PathVariable indicates that is a variable from URL
         //spring is going to understand that is a variable and will search in method search
@@ -37,7 +37,7 @@ public class UserController {
         //Now doing integration tests, we see that HTTP response is 200(Ok response) and not 201(Created response)
         //To solve this we use ResponseEntity class, that show us a full HTTP response send to client when this method is invocated
         //Using this is important when we create end points, to send full responses to various cases
-        return ResponseEntity.ok(this.userService.findbyID(id));
+        return ResponseEntity.ok(this.userService.findUserByID(id));
     }
 
     //Indicates that function is going to be requested via delete
