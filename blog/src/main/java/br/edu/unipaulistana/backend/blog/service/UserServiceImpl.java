@@ -21,12 +21,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByID(UUID id) {
-        return this.repository.findUserById(id);
+        return this.repository.findById(id).orElse(null);
     }
 
     @Override
     public void deleteByID(UUID id) {
-        this.repository.removeByID(id);
+        this.repository.deleteById(id);
     }
 
     @Override
@@ -37,16 +37,18 @@ public class UserServiceImpl implements UserService{
         //The decision to search if the user already exists is a crucial business rule, and always exists in service folder or domain model
         //RequestBody is needed because in any another system that access this API, we need to create a body with this object to pass through json
         //Here we pass a user parameter because we're creating a user, and not only using ID
-        return this.repository.create(user);
+        return this.repository.save(user);
     }
 
     @Override
     public User update(User user) {
-        return this.repository.update(user);
+        if (user.getId() == null)
+            user.setId(UUID.randomUUID());
+        return this.repository.save(user);
     }
 
     @Override
     public User partUpdate(User user) {
-        return this.repository.update(user);
+        return this.repository.save(user);
     }
 }
