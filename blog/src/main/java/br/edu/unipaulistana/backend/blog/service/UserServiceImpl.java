@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-    //constructor that implements the list of users, named as repository
+    //constructor that implements the list of users,  named as repository
         private final UserRepository repository;
     @Override
     public List<User> findAll() {
