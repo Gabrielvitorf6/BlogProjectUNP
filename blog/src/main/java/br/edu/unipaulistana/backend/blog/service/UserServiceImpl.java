@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -50,5 +51,35 @@ public class UserServiceImpl implements UserService{
     @Override
     public User partUpdate(User user) {
         return this.repository.save(user);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return this.repository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findUserByName(String name) {
+        return this.repository.findByName(name);
+    }
+
+    @Override
+    public Optional<User> findUserByNameStartingWithAndEnding(String name1, String name2) {
+        return this.repository.findByNameStartingWithAndNameEndingWith(name1, name2);
+    }
+
+    @Override
+    public List<User> findUserByMinRolesAndNameLike(int minRoles, String name) {
+        return this.repository.findByMinRolesAndNameLikeCriteria(minRoles, name);
+    }
+
+    @Override
+    public Optional<User> findByIdWithProfilesAndRoles(UUID id) {
+        return this.repository.findByIdWithProfileAndRoles(id);
+    }
+
+    @Override
+    public List<User> findUserByMinPostsAndNameLike(int minPosts, String name) {
+        return this.repository.findMinPostAndNameLike(minPosts, name);
     }
 }

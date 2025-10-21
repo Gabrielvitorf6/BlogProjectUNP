@@ -33,7 +33,7 @@ public class UserRepositoryImp implements UserRepositoryCustom <User, UUID> {
         TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
         List<User> users = query.getResultList();
 
-
+        //retorna usuário por id com profile e posts
         return users.stream().findFirst();
     }
 
@@ -54,6 +54,7 @@ public class UserRepositoryImp implements UserRepositoryCustom <User, UUID> {
 
                 //toda vez que faço root.get referencio objeto na query
 //Fetch = join das tabelas
+        //retorna usuário por minimo de roles e nome tipo
         return this.entityManager.createQuery(criteriaQuery).getResultList();
     }
 }

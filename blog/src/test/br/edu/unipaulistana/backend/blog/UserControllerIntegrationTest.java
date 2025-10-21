@@ -60,14 +60,13 @@ public class UserControllerIntegrationTest {
 
                 .andExpect(jsonPath("$.id", is(id)))//Expect my object.id = id
                 // Json path is a consult language for json,used here to navigate trough json response object
-                //$ character is used to start navigation in json root, in this case, we say "Go to json root, and search id property and return its value
+                //$ character is used to start navigation in json root, in this case, we say "Go to json root, and search id property and return its value"
 
                 .andExpect(jsonPath("$.name", is("Gabriel")))//Expect my object.name = name
                 .andReturn();//Invocate and verify if result is the same as expected
 
         var created = objectMapper.readValue(postResult.getResponse().getContentAsByteArray(), User.class);//This method need a signature class, declared as .class
         var returnedId = created.getId();
-
 
     }
 }

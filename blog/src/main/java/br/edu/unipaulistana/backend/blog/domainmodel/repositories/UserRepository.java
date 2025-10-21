@@ -16,8 +16,10 @@ public interface UserRepository extends
         UserRepositoryCustom<User , UUID>
         {
     @Query("SELECT U FROM User u WHERE u.email =:email")
-    public Optional<User> findByEmail(String email);
+    Optional<User> findByEmail(String email);
+
     Optional<User> findByName(String username);
+
      Optional<User> findByNameStartingWithAndNameEndingWith(String name1, String name2);
 
      //
@@ -34,4 +36,5 @@ public interface UserRepository extends
     order by u.nome asc
 """)
      List<User> findMinPostAndNameLike(@Param("minPosts")int minPosts, @Param("namePart")String namePart);
-}
+
+        }

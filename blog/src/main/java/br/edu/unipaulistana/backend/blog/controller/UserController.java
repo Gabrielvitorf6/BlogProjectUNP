@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 //http://localhost:8080/users
@@ -67,5 +68,31 @@ public class UserController {
     public ResponseEntity<User> patchUser(@RequestBody User user){
         return new ResponseEntity<>(this.userService.create(user), HttpStatus.CREATED);
     }
+    @GetMapping("/{email}")
+    public ResponseEntity<Optional<User>> findUserByEmail(@PathVariable String email){
+        return ResponseEntity.ok(this.userService.findByEmail(email));
+    }
+    @GetMapping("/{name}")
+    public ResponseEntity<Optional<User>> findUserByName(@PathVariable String name){
+        return ResponseEntity.ok(this.userService.findUserByName(name));
+    }
+    @GetMapping("{name1}"+"{name2}")
+    public ResponseEntity<Optional<User>> findUserByNameStartingAndNameEnding(@PathVariable String name1,@PathVariable String name2){
+        return ResponseEntity.ok(this.userService.findUserByNameStartingWithAndEnding(name1 , name2));
+    }
+    @GetMapping("{minRoles}"+"{name}")
+    public ResponseEntity<List<User>> findUserByMinRolesAndNameLike(@PathVariable int minRoles, @PathVariable String name){
+        return ResponseEntity.ok(this.userService.findUserByMinRolesAndNameLike(minRoles, name));
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<User>> findUserByIdWithProfilesAndRoles(@PathVariable UUID id){
+        return ResponseEntity.ok(this.userService.findByIdWithProfilesAndRoles(id));
+    }
+    @GetMapping("{minPosts}"+"{name}")
+    public ResponseEntity<List<User>> findByMinPOstsAndNameLike(@PathVariable int minPosts, @PathVariable String name){
+        return ResponseEntity.ok(this.userService.findUserByMinPostsAndNameLike(minPosts, name));
+    }
+    //find by email get finished,findByName FINISHED, findByNameStartingWithAndNameEndingWith FINISHED,
+    // findByIdWithProfileAndRoles , findMinPostAndNameLike FINISHED, findMinPostsAndNameLike
 
     }
