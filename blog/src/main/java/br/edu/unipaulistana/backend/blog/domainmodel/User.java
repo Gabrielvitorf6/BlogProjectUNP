@@ -3,10 +3,7 @@ package br.edu.unipaulistana.backend.blog.domainmodel;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,31 +18,34 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private @Getter
     @Setter UUID id;
 
-    @Column(name = "nome", nullable = false)
+    @Column( nullable = false)
     private @Getter
     @Setter String nome;
 
-    @Column(name = "email", nullable = false, unique = true, length = 40)
+    @Column(nullable = false, unique = true, length = 40)
     private @Getter
     @Setter String email;
 
-    @Column(name = "password", nullable = false, length = 20)
+    @Column(nullable = false, length = 20)
     private @Getter
     @Setter String password;
 
 
     @ManyToMany
-    private @Getter @Setter Set<Role> roles;
+    @JoinTable(name = "tb_user_role",
+            joinColumns = @JoinColumn(name  = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private@Getter @Setter Set<Role> roles = new HashSet<>();
 
-    @OneToOne
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private @Getter @Setter Profile profile;
 
-
-
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private  @Getter @Setter Post post;
 
     /*private @Getter @Setter List<Role> roles;
     private @Getter @Setter Profile profile; */
@@ -66,4 +66,3 @@ public class User {
         //Hash code is used as a .equals, to say that  object is the same as another, but with a faster form
     }
 }
-

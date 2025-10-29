@@ -14,27 +14,27 @@ public interface UserRepository extends
         JpaRepository<User, UUID>,
         QuerydslPredicateExecutor<User>,
         UserRepositoryCustom<User , UUID>
-        {
+{
     @Query("SELECT U FROM User u WHERE u.email =:email")
     Optional<User> findByEmail(String email);
 
     Optional<User> findByName(String username);
 
-     Optional<User> findByNameStartingWithAndNameEndingWith(String name1, String name2);
+    Optional<User> findByNameStartingWithAndNameEndingWith(String name1, String name2);
 
-     //
-     @Query("""
+    //
+    @Query("""
     SELECT DISTINCT u FROM User u LEFT JOIN fetch u.profile
     left join fetch u.roles
     WHERE u.id = :id
 """)
     Optional<User> findByIdWithProfileAndRoles(@Param("id") UUID id);
 
-     @Query("""
+    @Query("""
     select u from User u where size(u.roles) >= : minRoles
     and lower(u.nome) like lower(concat('%',:namePart, '%') )
     order by u.nome asc
 """)
-     List<User> findMinPostAndNameLike(@Param("minPosts")int minPosts, @Param("namePart")String namePart);
+    List<User> findMinPostAndNameLike(@Param("minPosts")int minPosts, @Param("namePart")String namePart);
 
-        }
+}

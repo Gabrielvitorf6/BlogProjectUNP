@@ -13,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     //constructor that implements the list of users,  named as repository
-        private final UserRepository repository;
+    private final UserRepository repository;
     @Override
     public List<User> findAll() {
         return this.repository.findAll();//As this method doesn't exist, we need to create and implement this, in repository

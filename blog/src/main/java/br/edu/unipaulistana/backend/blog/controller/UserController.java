@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-       return   ResponseEntity.ok(this.userService.findAll());
+        return   ResponseEntity.ok(this.userService.findAll());
         //use debug action in this celula and access via browser previous link, to show all users
         //this is our first endpoint, is a web service that request something and response something
     }
@@ -95,4 +95,4 @@ public class UserController {
     //find by email get finished,findByName FINISHED, findByNameStartingWithAndNameEndingWith FINISHED,
     // findByIdWithProfileAndRoles , findMinPostAndNameLike FINISHED, findMinPostsAndNameLike
 
-    }
+}
