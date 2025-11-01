@@ -24,7 +24,7 @@ public class User {
 
     @Column( nullable = false)
     private @Getter
-    @Setter String nome;
+    @Setter String name;
 
     @Column(nullable = false, unique = true, length = 40)
     private @Getter

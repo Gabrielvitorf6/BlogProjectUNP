@@ -27,9 +27,11 @@ public class Post {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private  @Getter @Setter User users;
+    private  @Getter @Setter User user;
 
-
+    @ManyToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tags;
     //private @Getter @Setter Set<Tag> tags;
 
 

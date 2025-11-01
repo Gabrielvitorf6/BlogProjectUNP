@@ -2,6 +2,8 @@ package br.edu.unipaulistana.backend.blog.controller;
 
 import br.edu.unipaulistana.backend.blog.domainmodel.User;
 import br.edu.unipaulistana.backend.blog.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +17,15 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@Tag(name = "Usuarios", description =
+"Operações relativas a usuários")
 
 public class UserController {
 
     private final UserService userService;
 
     @GetMapping
+    @Operation(method = "GET", summary = "Listar todos os usuários")
     public ResponseEntity<List<User>> findAll() {
         return   ResponseEntity.ok(this.userService.findAll());
         //use debug action in this celula and access via browser previous link, to show all users
@@ -84,7 +89,7 @@ public class UserController {
     public ResponseEntity<List<User>> findUserByMinRolesAndNameLike(@PathVariable int minRoles, @PathVariable String name){
         return ResponseEntity.ok(this.userService.findUserByMinRolesAndNameLike(minRoles, name));
     }
-    @GetMapping("{id}")
+    @GetMapping("{id}"+"{name}")
     public ResponseEntity<Optional<User>> findUserByIdWithProfilesAndRoles(@PathVariable UUID id){
         return ResponseEntity.ok(this.userService.findByIdWithProfilesAndRoles(id));
     }
@@ -92,6 +97,7 @@ public class UserController {
     public ResponseEntity<List<User>> findByMinPOstsAndNameLike(@PathVariable int minPosts, @PathVariable String name){
         return ResponseEntity.ok(this.userService.findUserByMinPostsAndNameLike(minPosts, name));
     }
+
     //find by email get finished,findByName FINISHED, findByNameStartingWithAndNameEndingWith FINISHED,
     // findByIdWithProfileAndRoles , findMinPostAndNameLike FINISHED, findMinPostsAndNameLike
 

@@ -2,6 +2,7 @@ package br.edu.unipaulistana.backend.blog.service;
 
 import br.edu.unipaulistana.backend.blog.domainmodel.User;
 import br.edu.unipaulistana.backend.blog.domainmodel.repositories.UserRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

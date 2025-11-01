@@ -4,6 +4,7 @@ package br.edu.unipaulistana.backend.blog.domainmodel;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,8 +23,8 @@ public class Tag {
     private  @Getter @Setter String name;
 
     //arrumar
-    @ManyToOne
-    private  @Getter @Setter Set<Post> posts;
+    @OneToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    private Set<Post> posts = new HashSet<>();
 
 
 }

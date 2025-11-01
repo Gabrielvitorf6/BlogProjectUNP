@@ -12,10 +12,9 @@ import java.util.UUID;
 
 public interface UserRepository extends
         JpaRepository<User, UUID>,
-        QuerydslPredicateExecutor<User>,
         UserRepositoryCustom<User , UUID>
+    //QuerydslPredicateExecutor<User>
 {
-    @Query("SELECT U FROM User u WHERE u.email =:email")
     Optional<User> findByEmail(String email);
 
     Optional<User> findByName(String username);
@@ -32,9 +31,8 @@ public interface UserRepository extends
 
     @Query("""
     select u from User u where size(u.roles) >= : minRoles
-    and lower(u.nome) like lower(concat('%',:namePart, '%') )
-    order by u.nome asc
+    and lower(u.name) like lower(concat('%',:namePart, '%') )
+    order by u.name asc
 """)
     List<User> findMinPostAndNameLike(@Param("minPosts")int minPosts, @Param("namePart")String namePart);
-
 }
